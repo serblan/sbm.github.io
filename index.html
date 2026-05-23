@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SBM — Catálogo Exclusivo</title>
+    
+    <link rel="icon" type="image/png" href="img/logo.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -42,7 +45,7 @@
             background: linear-gradient(to bottom, rgba(13,13,13,0.95), rgba(13,13,13,0.8));
             backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 20px 4%;
+            padding: 15px 4%;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -54,17 +57,19 @@
             align-items: center;
         }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            color: var(--text-main);
+        /* Estenedor adaptado para albergar la imagen del logotipo */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            height: 45px; /* Altura máxima del menú */
             text-decoration: none;
         }
 
-        .logo span {
-            color: var(--accent);
+        .logo-img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            display: block;
         }
 
         .search-box {
@@ -384,7 +389,9 @@
 
     <header>
         <div class="header-container">
-            <a href="#" class="logo">SBM<span>.</span></a>
+            <a href="#" class="logo-container">
+                <img src="img/logo.png" alt="SBM Logo" class="logo-img">
+            </a>
             <div class="search-box">
                 <input type="text" id="search-input" placeholder="Buscar prenda...">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -502,7 +509,6 @@
                 const term = e.target.value.toLowerCase().trim();
                 let hasVisibleProducts = false;
                 
-                // Obtenemos los elementos creados dinámicamente en el DOM
                 const dynamicSections = document.querySelectorAll('.tshirt-section');
 
                 dynamicSections.forEach(section => {
@@ -510,7 +516,6 @@
                     if (searchableText.includes(term)) {
                         section.style.display = 'flex';
                         hasVisibleProducts = true;
-                        // Forzamos un pequeño retraso para reactivar la animación suave
                         setTimeout(() => section.classList.add('visible'), 50);
                     } else {
                         section.style.display = 'none';
@@ -518,7 +523,6 @@
                     }
                 });
 
-                // Controlar visibilidad de secciones auxiliares y mensaje vacío
                 if (term.length > 0) {
                     if(customInfoSection) customInfoSection.style.display = 'none';
                     noResultsMessage.style.display = hasVisibleProducts ? 'none' : 'block';
@@ -538,7 +542,6 @@
 
             currentIdx += direction;
             
-            // Verificaciones límite para mantener bloques de 3 fotos válidos
             if (currentIdx > total - 2) currentIdx = 1;
             if (currentIdx < 1) currentIdx = (total - 2 < 1) ? 1 : (total - 2);
 
