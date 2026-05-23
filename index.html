@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SBM — Catálogo Exclusivo</title>
     
-    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="icon" type="image/png" href="img/logo1.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +34,28 @@
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            position: relative;
+        }
+
+        /* --- FONDO INTEGRADO PROFESIONAL CON ICONO.PNG --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            /* Carga icono.png de fondo centrado y estático */
+            background-image: url('img/icono.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 40%; /* Ajusta este porcentaje si quieres el icono más grande o pequeño */
+            background-attachment: fixed;
+            /* Ajustes premium de fusión y difuminado */
+            opacity: 0.04; /* Nivel muy bajo para que actúe como marca de agua sutil */
+            filter: blur(4px); /* Difumina los bordes del icono para máxima elegancia */
+            z-index: -1; /* Se mantiene detrás de todo el contenido */
+            pointer-events: none;
         }
 
         /* --- HEADER Y BARRA DE BÚSQUEDA --- */
@@ -57,11 +79,10 @@
             align-items: center;
         }
 
-        /* Estenedor adaptado para albergar la imagen del logotipo */
         .logo-container {
             display: flex;
             align-items: center;
-            height: 45px; /* Altura máxima del menú */
+            height: 45px;
             text-decoration: none;
         }
 
@@ -112,7 +133,8 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            background: radial-gradient(circle at center, rgba(30,30,30,0.5) 0%, rgba(13,13,13,1) 70%);
+            /* Degradado radial para oscurecer las esquinas e iluminar el centro */
+            background: radial-gradient(circle at center, rgba(13,13,13,0.2) 0%, rgba(13,13,13,0.9) 80%);
             position: relative;
         }
 
@@ -161,7 +183,8 @@
         }
 
         .custom-card {
-            background: linear-gradient(145deg, #141414, #0f0f0f);
+            background: linear-gradient(145deg, rgba(20,20,20,0.9), rgba(15,15,15,0.9));
+            backdrop-filter: blur(5px);
             border: 1px solid rgba(212, 175, 55, 0.1);
             border-radius: 12px;
             padding: 50px 40px;
