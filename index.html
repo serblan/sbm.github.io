@@ -37,27 +37,6 @@
             position: relative;
         }
 
-        /* --- FONDO INTEGRADO PROFESIONAL CON ICONO.PNG --- */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            /* Carga icono.png de fondo centrado y estático */
-            background-image: url('img/logo.png');
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: 40%; /* Ajusta este porcentaje si quieres el icono más grande o pequeño */
-            background-attachment: fixed;
-            /* Ajustes premium de fusión y difuminado */
-            opacity: 0.04; /* Nivel muy bajo para que actúe como marca de agua sutil */
-            filter: blur(4px); /* Difumina los bordes del icono para máxima elegancia */
-            z-index: -1; /* Se mantiene detrás de todo el contenido */
-            pointer-events: none;
-        }
-
         /* --- HEADER Y BARRA DE BÚSQUEDA --- */
         header {
             position: fixed;
@@ -124,7 +103,7 @@
             color: var(--text-muted);
         }
 
-        /* --- HERO PANTALLA COMPLETA --- */
+        /* --- HERO PANTALLA COMPLETA ESTÁTICO --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -133,9 +112,52 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            /* Degradado radial para oscurecer las esquinas e iluminar el centro */
-            background: radial-gradient(circle at center, rgba(13,13,13,0.2) 0%, rgba(13,13,13,0.9) 80%);
             position: relative;
+            overflow: hidden;
+            background: var(--bg-color);
+        }
+
+        /* Capa interna para fijar el logo difuminado solo en esta sección */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('img/logo.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 80%; /* Tamaño elegante del logo */
+            opacity: 0.50; /* Opacidad óptima para que no oculte el texto */
+            filter: blur(4px); /* Difuminado profesional */
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Capa de viñeta para oscurecer los bordes del Hero */
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(13,13,13,0) 20%, rgba(13,13,13,0.95) 90%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Contenedor del contenido para asegurar su correcta posición vertical */
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
         }
 
         .hero h1 {
@@ -149,6 +171,8 @@
         .scroll-down {
             position: absolute;
             bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -158,9 +182,9 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+            40% { transform: translate(-50%, -10px); }
+            60% { transform: translate(-50%, -5px); }
         }
 
         /* --- SECCIÓN ENCARGOS PERSONALIZADOS --- */
@@ -423,10 +447,12 @@
     </header>
 
     <section class="hero">
-        <h1>Colección de Camisetas</h1>
-        <div class="scroll-down">
-            <span>Deslizar para descubrir</span><br>
-            <i class="fa-solid fa-chevron-down" style="margin-top: 8px;"></i>
+        <div class="hero-content">
+            <h1>Colección de Camisetas</h1>
+            <div class="scroll-down">
+                <span>Deslizar para descubrir</span><br>
+                <i class="fa-solid fa-chevron-down" style="margin-top: 8px;"></i>
+            </div>
         </div>
     </section>
 
@@ -437,19 +463,23 @@
             <p>Realizamos encargos personalizados adaptados a tus preferencias. Precios muy competitivos. Puedes solicitar el modelo, talla o diseño que desees directamente a través de mensajería privada en la plataforma de reventa correspondiente.</p>
             <div class="custom-badges">
                 <div class="badge-item">
-                    <i class="fa-solid fa-comments"></i>
-                    <span>Precio final por mensaje privado</span>
+                    <i class="fa-solid fa-eur"></i>
+                    <span>Desde 18€*</span>
                 </div>
                 <div class="badge-item">
                     <i class="fa-solid fa-truck-fast"></i>
-                    <span>Envío listo en 7 - 15 días</span>
+                    <span>Entrega en 7 - 15 días</span>
                 </div>
                 <div class="badge-item">
-                    <i class="fa-solid fa-truck-fast"></i>
+                    <i class="fa-solid fa-shopping-basket"></i>
                     <span>Gastos de envío ya incluidos*</span>
                 </div>
+                <div class="badge-item">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                    <span>Calidad TOP</span>
+                </div>
             </div>
-            <br><p>*Los gastos de envío solo estan incluidos en pedidos personalizados</p>
+            <br><p>*Precio final por mensaje privado.*Los gastos de envío solo están incluidos en pedidos personalizados</p>
         </div>
     </section>
 
